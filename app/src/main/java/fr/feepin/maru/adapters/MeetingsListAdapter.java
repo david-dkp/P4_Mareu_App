@@ -63,7 +63,7 @@ public class MeetingsListAdapter extends ListAdapter<Meeting, MeetingsListAdapte
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        private ItemMeetingBinding binding;
+        private final ItemMeetingBinding binding;
 
         public ViewHolder(View rootView) {
             super(rootView);
