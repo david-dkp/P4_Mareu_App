@@ -66,7 +66,7 @@ public class MeetingListAdapter extends ListAdapter<Meeting, MeetingListAdapter.
         public ViewHolder(View rootView) {
             super(rootView);
             binding = ItemMeetingBinding.bind(rootView);
-            binding.ivDeleteIcon.setOnClickListener(view -> onMeetingDeleteListener.onMeetingDelete());
+            binding.ivDeleteIcon.setOnClickListener(view -> onMeetingDeleteListener.onMeetingDelete(getCurrentList().get(getAdapterPosition())));
         }
 
         public void bind(Meeting meeting) {
@@ -79,6 +79,6 @@ public class MeetingListAdapter extends ListAdapter<Meeting, MeetingListAdapter.
     }
 
     public interface OnMeetingDelete {
-        void onMeetingDelete();
+        void onMeetingDelete(Meeting meeting);
     }
 }
