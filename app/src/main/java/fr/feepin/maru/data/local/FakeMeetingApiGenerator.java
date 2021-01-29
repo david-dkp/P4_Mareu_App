@@ -51,13 +51,13 @@ public class FakeMeetingApiGenerator {
 
     public static Meeting[] fakeMeetings = {
             new Meeting(1, getTimeInMillis(17, 45), "Casino", "Stocks", generateRandomParticipants(6)),
-            new Meeting(1, getTimeInMillis(8, 00), "Salle 24", "Daily", generateRandomParticipants(2)),
-            new Meeting(1, getTimeInMillis(14, 20), "Meeting Room", "Etat des lieux", generateRandomParticipants(3)),
-            new Meeting(1, getTimeInMillis(9, 30), "Grand Room", "Marketing", generateRandomParticipants(4)),
-            new Meeting(1, getTimeInMillis(16, 50), "Salle 22", "Projet 23", generateRandomParticipants(2)),
-            new Meeting(1, getTimeInMillis(8, 30), "Salle 05", "Briefing", generateRandomParticipants(8)),
-            new Meeting(1, getTimeInMillis(15, 00), "OpenSpace", "Brainstorming", generateRandomParticipants(6)),
-            new Meeting(1, getTimeInMillis(19, 20), "Salle 12", "Review", generateRandomParticipants(2)),
+            new Meeting(2, getTimeInMillis(8, 00), "Salle 24", "Daily", generateRandomParticipants(2)),
+            new Meeting(3, getTimeInMillis(14, 20), "Meeting Room", "Etat des lieux", generateRandomParticipants(3)),
+            new Meeting(4, getTimeInMillis(9, 30), "Grand Room", "Marketing", generateRandomParticipants(4)),
+            new Meeting(5, getTimeInMillis(16, 50), "Salle 22", "Projet 23", generateRandomParticipants(2)),
+            new Meeting(6, getTimeInMillis(8, 30), "Salle 05", "Briefing", generateRandomParticipants(8)),
+            new Meeting(7, getTimeInMillis(15, 00), "OpenSpace", "Brainstorming", generateRandomParticipants(6)),
+            new Meeting(8, getTimeInMillis(19, 20), "Salle 12", "Review", generateRandomParticipants(2)),
     };
 
 }
