@@ -8,6 +8,7 @@ import org.junit.runners.JUnit4;
 
 import fr.feepin.maru.models.Meeting;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(JUnit4.class)
@@ -47,6 +48,6 @@ public class MeetingApiTest {
         meetingApi.addMeeting(meeting);
         meetingApi.deleteMeeting(meeting);
 
-        assertTrue(meetingApi.getMeetings().contains(meeting));
+        assertFalse(meetingApi.getMeetings().contains(meeting));
     }
 }

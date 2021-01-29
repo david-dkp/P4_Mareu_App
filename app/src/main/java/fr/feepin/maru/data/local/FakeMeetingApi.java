@@ -7,7 +7,7 @@ import fr.feepin.maru.models.Meeting;
 
 public class FakeMeetingApi implements MeetingApi {
 
-    private final ArrayList<Meeting> meetings = FakeMeetingApiGenerator.generateMeetings();
+    private ArrayList<Meeting> meetings = FakeMeetingApiGenerator.generateMeetings();
 
     @Override
     public void addMeeting(Meeting meeting) {
