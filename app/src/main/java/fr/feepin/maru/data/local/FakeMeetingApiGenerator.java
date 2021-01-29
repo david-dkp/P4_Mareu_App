@@ -41,7 +41,7 @@ public class FakeMeetingApiGenerator {
         return new ArrayList<Meeting>(Arrays.asList(fakeMeetings));
     }
 
-    private static long getTimeInMillis(int hours, int minutes) {
+    public static long getTimeInMillis(int hours, int minutes) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, hours);
         calendar.set(Calendar.MINUTE, minutes);
