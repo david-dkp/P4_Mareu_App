@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Maréu</string>
+
+    <string name="desc_meeting_icon">Meeting icon</string>
+    <string name="label_main_activity">Ma réu</string>
+    <string name="desc_add_meeting">Add meeting</string>
+    <string name="desc_delete_meeting">Delete meeting</string>
 </resources>

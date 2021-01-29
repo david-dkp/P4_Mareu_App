@@ -1,2 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <!--Main Activity-->
+    <dimen name="fab_add_meeting_margin">15dp</dimen>
+    <!--Item Meeting-->
+    <dimen name="meeting_icon_size">80dp</dimen>
+    <dimen name="meeting_icon_padding">15dp</dimen>
+    <dimen name="meeting_delete_icon_size">@dimen/meeting_icon_size</dimen>
+    <dimen name="meeting_delete_icon_padding">24dp</dimen>
+</resources>
