@@ -10,7 +10,7 @@ public class StringUtil {
         for (int i = 0; i < list.size(); i++) {
             stringBuilder.append(list.get(i));
 
-            if (i != list.size()-1) {
+            if (i != list.size() - 1) {
                 stringBuilder.append(separator);
             }
         }

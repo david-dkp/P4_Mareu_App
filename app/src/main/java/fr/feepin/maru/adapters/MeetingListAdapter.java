@@ -10,17 +10,15 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.stream.Collectors;
-
 import fr.feepin.maru.R;
 import fr.feepin.maru.databinding.ItemMeetingBinding;
 import fr.feepin.maru.models.Meeting;
 import fr.feepin.maru.utils.DateFormatUtil;
 import fr.feepin.maru.utils.StringUtil;
 
-public class MeetingsListAdapter extends ListAdapter<Meeting, MeetingsListAdapter.ViewHolder> {
+public class MeetingListAdapter extends ListAdapter<Meeting, MeetingListAdapter.ViewHolder> {
 
-    private static DiffUtil.ItemCallback<Meeting> diffCallback = new DiffUtil.ItemCallback<Meeting>() {
+    private static final DiffUtil.ItemCallback<Meeting> diffCallback = new DiffUtil.ItemCallback<Meeting>() {
         @Override
         public boolean areItemsTheSame(@NonNull Meeting oldItem, @NonNull Meeting newItem) {
             return oldItem.getId() == newItem.getId();
@@ -35,7 +33,7 @@ public class MeetingsListAdapter extends ListAdapter<Meeting, MeetingsListAdapte
 
     private OnMeetingDelete onMeetingDeleteListener;
 
-    public MeetingsListAdapter(OnMeetingDelete onMeetingDeleteListener) {
+    public MeetingListAdapter(OnMeetingDelete onMeetingDeleteListener) {
         super(diffCallback);
         this.onMeetingDeleteListener = onMeetingDeleteListener;
     }
@@ -81,6 +79,6 @@ public class MeetingsListAdapter extends ListAdapter<Meeting, MeetingsListAdapte
     }
 
     public interface OnMeetingDelete {
-        public void onMeetingDelete();
+        void onMeetingDelete();
     }
 }
