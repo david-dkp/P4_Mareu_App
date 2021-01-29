@@ -35,7 +35,7 @@ public class MeetingsListAdapter extends ListAdapter<Meeting, MeetingsListAdapte
 
     private OnMeetingDelete onMeetingDeleteListener;
 
-    public MeetingsListAdapter (OnMeetingDelete onMeetingDeleteListener){
+    public MeetingsListAdapter(OnMeetingDelete onMeetingDeleteListener) {
         super(diffCallback);
         this.onMeetingDeleteListener = onMeetingDeleteListener;
     }
@@ -62,7 +62,7 @@ public class MeetingsListAdapter extends ListAdapter<Meeting, MeetingsListAdapte
         return onMeetingDeleteListener;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
         private final ItemMeetingBinding binding;
 
         public ViewHolder(View rootView) {
@@ -71,7 +71,7 @@ public class MeetingsListAdapter extends ListAdapter<Meeting, MeetingsListAdapte
             binding.ivDeleteIcon.setOnClickListener(view -> onMeetingDeleteListener.onMeetingDelete());
         }
 
-        public void bind (Meeting meeting) {
+        public void bind(Meeting meeting) {
             binding.tvMeetingInfo.setText(
                     String.format("%s - %s - %s", meeting.getPlace(), DateFormatUtil.formatToTime(meeting.getStartingTime()), meeting.getSubject())
             );
