@@ -3,6 +3,7 @@ package fr.feepin.maru;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.Menu;
 
 import java.util.ArrayList;
 
@@ -31,6 +32,12 @@ public class MainActivity extends AppCompatActivity implements MeetingListAdapte
         meetingListAdapter = new MeetingListAdapter(this);
 
         setupRecyclerView();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_actionbar, menu);
+        return true;
     }
 
     @Override

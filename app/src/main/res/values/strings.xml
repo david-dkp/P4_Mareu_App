@@ -5,4 +5,5 @@
     <string name="label_main_activity">Ma réu</string>
     <string name="desc_add_meeting">Add meeting</string>
     <string name="desc_delete_meeting">Delete meeting</string>
+    <string name="title_filter">Filter</string>
 </resources>
