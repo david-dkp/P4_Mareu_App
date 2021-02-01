@@ -1,4 +1,4 @@
-package fr.feepin.maru;
+package fr.feepin.maru.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import fr.feepin.maru.R;
 import fr.feepin.maru.adapters.MeetingListAdapter;
 import fr.feepin.maru.data.local.FakeMeetingApi;
 import fr.feepin.maru.data.local.MeetingApi;
