@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Maréu">
-        <activity android:name=".MainActivity"
+        <activity android:name=".MeetingListActivity"
             android:label="@string/label_main_activity"
             >
             <intent-filter>

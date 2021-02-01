@@ -4,18 +4,20 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.Menu;
+import android.widget.TextView;
+
 
 import java.util.ArrayList;
 
 import fr.feepin.maru.adapters.MeetingListAdapter;
 import fr.feepin.maru.data.local.FakeMeetingApi;
 import fr.feepin.maru.data.local.MeetingApi;
-import fr.feepin.maru.databinding.ActivityMainBinding;
+import fr.feepin.maru.databinding.ActivityMeetingListBinding;
 import fr.feepin.maru.models.Meeting;
 
-public class MainActivity extends AppCompatActivity implements MeetingListAdapter.OnMeetingDelete {
+public class MeetingListActivity extends AppCompatActivity implements MeetingListAdapter.OnMeetingDelete {
 
-    private ActivityMainBinding binding;
+    private ActivityMeetingListBinding binding;
     private MeetingApi meetingApi;
     private MeetingListAdapter meetingListAdapter;
 
@@ -24,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements MeetingListAdapte
         super.onCreate(savedInstanceState);
 
         //Binding and inflating view
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        binding = ActivityMeetingListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         //Init datas
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements MeetingListAdapte
         meetingListAdapter = new MeetingListAdapter(this);
 
         setupRecyclerView();
+        TextView textView;
     }
 
     @Override
