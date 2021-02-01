@@ -35,7 +35,6 @@ public class MeetingListActivity extends AppCompatActivity implements MeetingLis
         meetingListAdapter = new MeetingListAdapter(this);
 
         setupRecyclerView();
-        TextView textView;
     }
 
     @Override
