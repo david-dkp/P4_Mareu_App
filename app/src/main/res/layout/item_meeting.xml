@@ -19,14 +19,16 @@
         />
 
     <ImageView
+        app:layout_constraintLeft_toRightOf="@id/tvMeetingInfo"
         android:contentDescription="@string/desc_delete_meeting"
         android:id="@+id/ivDeleteIcon"
         android:layout_width="@dimen/meeting_delete_icon_size"
         android:layout_height="@dimen/meeting_delete_icon_size"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="@dimen/meeting_delete_icon_margin"
         android:src="@drawable/ic_delete"
-        android:padding="@dimen/meeting_delete_icon_padding"
         app:tint="@color/violet_dark"
         />
 
@@ -48,7 +50,7 @@
         android:singleLine="true"
         app:layout_constraintLeft_toRightOf="@id/ivMeetingIcon"
         app:layout_constraintTop_toBottomOf="@id/tvMeetingInfo"
-        app:layout_constraintRight_toLeftOf="@id/ivDeleteIcon"
+        app:layout_constraintRight_toRightOf="@id/tvMeetingInfo"
         app:layout_constraintBottom_toBottomOf="parent"
         android:id="@+id/tvMeetingParticipants"
         android:layout_width="0dp"
