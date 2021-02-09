@@ -33,4 +33,8 @@ public class FakeMeetingApi implements MeetingApi {
         }
         return instance;
     }
+
+    public static void resetApi() {
+        instance = null;
+    }
 }
