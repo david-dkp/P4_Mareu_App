@@ -10,4 +10,5 @@ public interface MeetingListMvpView extends MvpView{
     void onMeetingDeleted(Meeting meeting);
     void onFilterChange(MeetingListFilterData meetingListFilterData);
     void navigateToAddActivity();
+    void toggleFilterView(boolean open);
 }
