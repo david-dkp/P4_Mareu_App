@@ -5,23 +5,22 @@ import androidx.annotation.NonNull;
 import com.google.android.material.slider.LabelFormatter;
 import com.google.android.material.slider.RangeSlider;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MeetingListFilterData {
-    private String place;
+    private final ArrayList<String> places;
     private long startingTimeMillis;
     private long endingTimeMillis;
 
     public MeetingListFilterData() {
-        this.place = "";
+        this.places = new ArrayList<String>();
         this.startingTimeMillis = 0;
         this.endingTimeMillis = 0;
     }
 
-    public String getPlace() {
-        return place;
-    }
-
-    public void setPlace(String place) {
-        this.place = place;
+    public ArrayList<String> getPlaces() {
+        return places;
     }
 
     public long getStartingTimeMillis() {
