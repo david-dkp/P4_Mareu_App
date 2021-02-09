@@ -22,11 +22,11 @@ public abstract class BasePresenter<T extends MvpView> implements MvpPresenter<T
         this.view = null;
     }
 
-    public T getView() {
+    protected T getView() {
         return view;
     }
 
-    private MeetingApi getMeetingApi() {
+    protected MeetingApi getMeetingApi() {
         return meetingApi;
     }
 }
