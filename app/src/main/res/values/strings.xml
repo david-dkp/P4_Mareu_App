@@ -11,4 +11,5 @@
     <string name="text_filter">Filter</string>
     <string name="text_filter_place">Place</string>
     <string name="text_filter_time">Time</string>
+    <string name="text_filter_by">Filter by : </string>
 </resources>

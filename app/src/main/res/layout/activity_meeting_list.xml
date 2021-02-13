@@ -7,22 +7,72 @@
     tools:context=".activities.MeetingListActivity"
     >
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            app:layout_scrollFlags="enterAlways"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
+            android:id="@+id/toolbar"
+            app:menu="@menu/menu_actionbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/filterContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <com.google.android.material.tabs.TabLayout
+                style="@style/Widget.Maréu.TabLayout"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/tabLayoutFilter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <com.google.android.material.tabs.TabItem
+                    android:id="@+id/tabItemPlace"
+                    android:text="@string/text_filter_place"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <com.google.android.material.tabs.TabItem
+                    android:id="@+id/tabItemTime"
+                    android:text="@string/text_filter_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </com.google.android.material.tabs.TabLayout>
+
+            <androidx.viewpager2.widget.ViewPager2
+                app:layout_constraintTop_toBottomOf="@id/tabLayoutFilter"
+                android:id="@+id/viewPagerFilter"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/view_pager_filter_height" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvMeetings"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/item_meeting"/>
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        tools:listitem="@layout/item_meeting"
+        />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAddMeeting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/desc_add_meeting"
-        app:srcCompat="@drawable/ic_plus"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_add_meeting_margin"
+        android:contentDescription="@string/desc_add_meeting"
+        app:srcCompat="@drawable/ic_plus"
+        tools:visibility="visible"
         />
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

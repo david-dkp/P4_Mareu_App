@@ -4,6 +4,7 @@
     <dimen name="fab_add_meeting_margin">20dp</dimen>
     <dimen name="filter_sheet_corner_radius">10dp</dimen>
     <dimen name="textInput_corner_radius">0dp</dimen>
+    <dimen name="view_pager_filter_height">100dp</dimen>
 
     <!--Item Meeting-->
     <dimen name="meeting_icon_size">80dp</dimen>
