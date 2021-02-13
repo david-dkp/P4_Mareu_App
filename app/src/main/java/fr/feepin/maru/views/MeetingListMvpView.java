@@ -6,9 +6,9 @@ import fr.feepin.maru.models.Meeting;
 import fr.feepin.maru.models.MeetingListFilterData;
 
 public interface MeetingListMvpView extends MvpView{
-    void onMeetingListData(List<Meeting> meetingList);
-    void onMeetingDeleted(Meeting meeting);
-    void onFilterChange(MeetingListFilterData meetingListFilterData);
+    void setMeetingListData(List<Meeting> meetingList);
+    void deleteMeeting(Meeting meeting);
+    void changeFilter(MeetingListFilterData meetingListFilterData);
     void navigateToAddActivity();
     void toggleFilterView(boolean open);
 }
