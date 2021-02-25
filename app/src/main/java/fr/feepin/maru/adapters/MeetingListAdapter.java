@@ -1,6 +1,7 @@
 package fr.feepin.maru.adapters;
 
 import android.annotation.SuppressLint;
+import android.content.res.ColorStateList;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,9 +72,10 @@ public class MeetingListAdapter extends ListAdapter<Meeting, MeetingListAdapter.
 
         public void bind(Meeting meeting) {
             binding.tvMeetingInfo.setText(
-                    String.format("%s - %s - %s", meeting.getPlace(), DateFormatUtil.formatToTime(meeting.getStartingTime()), meeting.getSubject())
+                    String.format("%s - %s - %s", meeting.getRoom().getRoomName(), DateFormatUtil.formatToTime(meeting.getStartingTime()), meeting.getSubject())
             );
             binding.tvMeetingParticipants.setText(StringUtil.join(", ", meeting.getParticipantsEmail()));
+            binding.ivMeetingIcon.setImageTintList(ColorStateList.valueOf(meeting.getRoom().getRoomColor()));
         }
 
     }
