@@ -4,18 +4,4 @@
         <item>0</item>
         <item>24</item>
     </integer-array>
-
-    <string-array name="meeting_room_names">
-        <item>Mario</item>
-        <item>Luigi</item>
-        <item>Peach</item>
-        <item>Toad</item>
-        <item>Yoshi</item>
-        <item>Daisy</item>
-        <item>D.K.</item>
-        <item>Rosalina</item>
-        <item>Browser</item>
-        <item>Wario</item>
-        <item>Waluigi</item>
-    </string-array>
 </resources>

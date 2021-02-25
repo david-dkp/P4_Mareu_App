@@ -12,4 +12,18 @@
     <string name="text_filter_place">Place</string>
     <string name="text_filter_time">Time</string>
     <string name="text_filter_by">Filter by : </string>
+
+    <!--Room names-->
+    <string name="room_mario">Mario</string>
+    <string name="room_luigi">Luigi</string>
+    <string name="room_peach">Peach</string>
+    <string name="room_toad">Toad</string>
+    <string name="room_yoshi">Yoshi</string>
+    <string name="room_daisy">Daisy</string>
+    <string name="room_dk">D.K.</string>
+    <string name="room_rosalina">Rosalina</string>
+    <string name="room_browser">Browser</string>
+    <string name="room_wario">Wario</string>
+    <string name="room_waluigi">Waluigi</string>
+
 </resources>
