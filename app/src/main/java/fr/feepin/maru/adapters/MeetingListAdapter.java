@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
@@ -72,10 +73,15 @@ public class MeetingListAdapter extends ListAdapter<Meeting, MeetingListAdapter.
 
         public void bind(Meeting meeting) {
             binding.tvMeetingInfo.setText(
-                    String.format("%s - %s - %s", meeting.getRoom().getRoomName(), DateFormatUtil.formatToTime(meeting.getStartingTime()), meeting.getSubject())
+                    String.format("%s - %s - %s", binding.getRoot().getContext().getString(meeting.getRoom().getRoomName()), DateFormatUtil.formatToTime(meeting.getStartingTime()), meeting.getSubject())
             );
             binding.tvMeetingParticipants.setText(StringUtil.join(", ", meeting.getParticipantsEmail()));
-            binding.ivMeetingIcon.setImageTintList(ColorStateList.valueOf(meeting.getRoom().getRoomColor()));
+            binding.ivMeetingIcon.setImageTintList(ColorStateList.valueOf(
+                    ContextCompat.getColor(
+                            binding.getRoot().getContext(),
+                            meeting.getRoom().getRoomColor()
+                    )
+            ));
         }
 
     }
