@@ -7,6 +7,7 @@
     >
 
     <ImageView
+        android:src="@drawable/meeting_room_image_foreground"
         android:id="@+id/ivMeetingIcon"
         android:layout_width="@dimen/meeting_icon_size"
         android:layout_height="@dimen/meeting_icon_size"
@@ -15,7 +16,7 @@
         android:scaleType="centerCrop"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="?attr/colorPrimary"
+        tools:tint="@color/green"
         />
 
     <ImageView
