@@ -5,13 +5,13 @@ import java.util.List;
 public class Meeting {
     private int id;
     private long startingTime;
-    private String place;
+    private Room room;
     private String subject;
     private List<String> participantsEmail;
 
-    public Meeting(int id, long startingTime, String place, String subject, List<String> participantsEmail) {
+    public Meeting(int id, long startingTime, Room room, String subject, List<String> participantsEmail) {
         this.startingTime = startingTime;
-        this.place = place;
+        this.room = room;
         this.subject = subject;
         this.participantsEmail = participantsEmail;
         this.id = id;
@@ -25,12 +25,12 @@ public class Meeting {
         this.startingTime = startingTime;
     }
 
-    public String getPlace() {
-        return place;
+    public Room getRoom() {
+        return room;
     }
 
-    public void setPlace(String place) {
-        this.place = place;
+    public void setRoom(Room room) {
+        this.room = room;
     }
 
     public String getSubject() {
