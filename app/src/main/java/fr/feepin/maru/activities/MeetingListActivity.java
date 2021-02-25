@@ -1,13 +1,20 @@
 package fr.feepin.maru.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
-import android.widget.TextView;
+import android.view.MenuItem;
 
+
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import fr.feepin.maru.R;
 import fr.feepin.maru.adapters.MeetingListAdapter;
@@ -15,12 +22,15 @@ import fr.feepin.maru.data.local.FakeMeetingApi;
 import fr.feepin.maru.data.local.MeetingApi;
 import fr.feepin.maru.databinding.ActivityMeetingListBinding;
 import fr.feepin.maru.models.Meeting;
+import fr.feepin.maru.presenters.MeetingListMvpPresenter;
+import fr.feepin.maru.presenters.MeetingListPresenter;
+import fr.feepin.maru.views.MeetingListMvpView;
 
-public class MeetingListActivity extends AppCompatActivity implements MeetingListAdapter.OnMeetingDelete {
+public class MeetingListActivity extends AppCompatActivity implements MeetingListMvpView, MeetingListAdapter.OnMeetingDelete {
 
     private ActivityMeetingListBinding binding;
-    private MeetingApi meetingApi;
     private MeetingListAdapter meetingListAdapter;
+    private MeetingListMvpPresenter meetingListPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,37 +40,65 @@ public class MeetingListActivity extends AppCompatActivity implements MeetingLis
         binding = ActivityMeetingListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        setupToolbar();
+
         //Init datas
-        meetingApi = new FakeMeetingApi();
         meetingListAdapter = new MeetingListAdapter(this);
-
         setupRecyclerView();
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_actionbar, menu);
-        return true;
+        //Init presenter
+        meetingListPresenter = new MeetingListPresenter(FakeMeetingApi.getInstance());
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        refreshData();
+        meetingListPresenter.onAttachView(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        meetingListPresenter.onDetachView();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        FakeMeetingApi.resetApi();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        return false;
     }
 
     @Override
     public void onMeetingDelete(Meeting meeting) {
-        meetingApi.deleteMeeting(meeting);
-        refreshData();
-    }
-
-    private void refreshData() {
-        meetingListAdapter.submitList(new ArrayList<Meeting>(meetingApi.getMeetings()));
+        meetingListPresenter.onDeleteMeetingIconClick(meeting);
     }
 
     private void setupRecyclerView() {
-        meetingListAdapter.submitList(new ArrayList<Meeting>(meetingApi.getMeetings()));
         binding.rvMeetings.setAdapter(meetingListAdapter);
+    }
+
+    private void setupToolbar() {
+        setSupportActionBar(binding.toolbar);
+    }
+
+    @Override
+    public void setMeetingListData(List<Meeting> meetingList) {
+        meetingListAdapter.submitList(new ArrayList<>(meetingList));
+    }
+
+    @Override
+    public void navigateToAddActivity() {
+
+    }
+
+    @Override
+    public void toggleFilterView(boolean open) {
+
     }
 }
