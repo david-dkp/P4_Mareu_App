@@ -6,4 +6,14 @@
     <color name="red">#CE0A24</color>
     <color name="blue">#4E92DF</color>
     <color name="blue_dark">#3F7ABD</color>
+    <color name="red_dark">#7A2301</color>
+    <color name="green_dark">#307820</color>
+    <color name="pink">#F68EB5</color>
+    <color name="green">#37A816</color>
+    <color name="violet_light">#AAA4CE</color>
+    <color name="brown">#8F392A</color>
+    <color name="cyan">#8EE6DA</color>
+    <color name="yellow">#F5B713</color>
+    <color name="violet_darker">#8C2A7F</color>
+    <color name="violet">#7D37CA</color>
 </resources>
