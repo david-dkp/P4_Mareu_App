@@ -3,15 +3,15 @@ package fr.feepin.maru.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.res.Configuration;
 import android.os.Bundle;
-import android.util.Log;
+import android.transition.AutoTransition;
+import android.transition.ChangeBounds;
+import android.transition.ChangeTransform;
+import android.transition.Transition;
+import android.transition.TransitionManager;
 import android.view.Menu;
 import android.view.MenuItem;
-
-
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.snackbar.Snackbar;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,6 @@ import java.util.List;
 import fr.feepin.maru.R;
 import fr.feepin.maru.adapters.MeetingListAdapter;
 import fr.feepin.maru.data.local.FakeMeetingApi;
-import fr.feepin.maru.data.local.MeetingApi;
 import fr.feepin.maru.databinding.ActivityMeetingListBinding;
 import fr.feepin.maru.models.Meeting;
 import fr.feepin.maru.presenters.MeetingListMvpPresenter;
@@ -70,7 +69,10 @@ public class MeetingListActivity extends AppCompatActivity implements MeetingLis
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
+        if (item.getItemId() == R.id.filter) {
+            meetingListPresenter.onFilterIconClick();
+            return true;
+        }
         return false;
     }
 
@@ -88,6 +90,12 @@ public class MeetingListActivity extends AppCompatActivity implements MeetingLis
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_actionbar, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
     public void setMeetingListData(List<Meeting> meetingList) {
         meetingListAdapter.submitList(new ArrayList<>(meetingList));
     }
@@ -99,6 +107,9 @@ public class MeetingListActivity extends AppCompatActivity implements MeetingLis
 
     @Override
     public void toggleFilterView(boolean open) {
-
+        Transition transition = new AutoTransition();
+        transition.setDuration(getResources().getInteger(R.integer.filter_entering_animation_duration));
+        TransitionManager.beginDelayedTransition(binding.getRoot(), transition);
+        binding.filterContainer.setVisibility(open ? View.VISIBLE : View.GONE);
     }
 }
