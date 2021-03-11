@@ -16,4 +16,6 @@
     <color name="yellow">#F5B713</color>
     <color name="violet_darker">#8C2A7F</color>
     <color name="violet">#7D37CA</color>
+    <color name="grey">#939393</color>
+    <color name="grey_light">#DFDFDF</color>
 </resources>
