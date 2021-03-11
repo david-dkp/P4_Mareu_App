@@ -1,15 +1,13 @@
 package fr.feepin.maru.data.local;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
 import fr.feepin.maru.models.Meeting;
 import fr.feepin.maru.models.Room;
-import fr.feepin.maru.utils.DateUtils;
+import fr.feepin.maru.utils.DateUtil;
 
 public class FakeMeetingApiGenerator {
 
@@ -46,14 +44,14 @@ public class FakeMeetingApiGenerator {
     }
 
     public static Meeting[] fakeMeetings = {
-            new Meeting(1, DateUtils.getDateMillisFromTime(17, 45), Room.LUIGI, "Stocks", generateRandomParticipants(6)),
-            new Meeting(2, DateUtils.getDateMillisFromTime(8, 00), Room.WARIO, "Daily", generateRandomParticipants(2)),
-            new Meeting(3, DateUtils.getDateMillisFromTime(14, 20), Room.YOSHI, "Etat des lieux", generateRandomParticipants(3)),
-            new Meeting(4, DateUtils.getDateMillisFromTime(9, 30), Room.MARIO, "Marketing", generateRandomParticipants(4)),
-            new Meeting(5, DateUtils.getDateMillisFromTime(16, 50), Room.PEACH, "Projet 23", generateRandomParticipants(2)),
-            new Meeting(6, DateUtils.getDateMillisFromTime(8, 30), Room.TOAD, "Briefing", generateRandomParticipants(8)),
-            new Meeting(7, DateUtils.getDateMillisFromTime(15, 00), Room.WALUIGI, "Brainstorming", generateRandomParticipants(6)),
-            new Meeting(8, DateUtils.getDateMillisFromTime(19, 20), Room.DK, "Review", generateRandomParticipants(2)),
+            new Meeting(1, DateUtil.getDateMillisFromTime(17, 45), Room.LUIGI, "Stocks", generateRandomParticipants(6)),
+            new Meeting(2, DateUtil.getDateMillisFromTime(8, 00), Room.WARIO, "Daily", generateRandomParticipants(2)),
+            new Meeting(3, DateUtil.getDateMillisFromTime(14, 20), Room.YOSHI, "Etat des lieux", generateRandomParticipants(3)),
+            new Meeting(4, DateUtil.getDateMillisFromTime(9, 30), Room.MARIO, "Marketing", generateRandomParticipants(4)),
+            new Meeting(5, DateUtil.getDateMillisFromTime(16, 50), Room.PEACH, "Projet 23", generateRandomParticipants(2)),
+            new Meeting(6, DateUtil.getDateMillisFromTime(8, 30), Room.TOAD, "Briefing", generateRandomParticipants(8)),
+            new Meeting(7, DateUtil.getDateMillisFromTime(15, 00), Room.WALUIGI, "Brainstorming", generateRandomParticipants(6)),
+            new Meeting(8, DateUtil.getDateMillisFromTime(19, 20), Room.DK, "Review", generateRandomParticipants(2)),
     };
 
 }
