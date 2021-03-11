@@ -11,4 +11,12 @@
     <dimen name="meeting_icon_padding">15dp</dimen>
     <dimen name="meeting_delete_icon_size">30dp</dimen>
     <dimen name="meeting_delete_icon_margin">20dp</dimen>
+    <dimen name="room_filter_padding">10dp</dimen>
+    <dimen name="room_list_height">100dp</dimen>
+    <dimen name="time_filter_slider_margin_horizontal">40dp</dimen>
+    <dimen name="icon_close_size">33dp</dimen>
+    <dimen name="icon_close_margin">15dp</dimen>
+    <dimen name="add_meeting_content_margin_left">30dp</dimen>
+    <dimen name="add_meeting_participants_rv_height">180dp</dimen>
+    <dimen name="item_participant_height">60dp</dimen>
 </resources>
