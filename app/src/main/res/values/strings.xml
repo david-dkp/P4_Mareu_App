@@ -25,5 +25,13 @@
     <string name="room_browser">Browser</string>
     <string name="room_wario">Wario</string>
     <string name="room_waluigi">Waluigi</string>
+    <string name="apply_text">Apply</string>
+    <string name="desc_reset_filter">Reset filter</string>
+    <string name="desc_close_add_meeting_screen">Close add meeting screen</string>
+    <string name="text_add_meeting">Add a new meeting</string>
+    <string name="text_add_meeting_room">Room: </string>
+    <string name="text_add_meeting_participants">Participants: </string>
+    <string name="desc_add_participant">Add a participant</string>
+    <string name="text_add_meeting_time">Time : </string>
 
 </resources>
