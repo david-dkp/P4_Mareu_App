@@ -7,7 +7,7 @@ public enum Room {
     LUIGI(R.string.room_luigi, R.color.green_dark),
     PEACH(R.string.room_peach, R.color.pink),
     TOAD(R.string.room_toad, R.color.white),
-    YOSHI(R.string.room_toad, R.color.green),
+    YOSHI(R.string.room_yoshi, R.color.green),
     DAISY(R.string.room_daisy, R.color.violet_darker),
     DK(R.string.room_dk, R.color.brown),
     ROSALINA(R.string.room_rosalina, R.color.cyan),
