@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/room_filter_padding"
+    >
+
+    <TextView
+        android:id="@+id/tvRoomFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_filter_room"
+        android:textAppearance="?attr/textAppearanceHeadline5"
+        android:textColor="?attr/colorOnSurface"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <ScrollView
+        android:id="@+id/scrollViewRooms"
+        android:layout_width="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_height="@dimen/room_list_height"
+        android:layout_marginHorizontal="10dp"
+        android:paddingHorizontal="10dp"
+        android:layout_marginTop="5dp"
+        android:background="?attr/colorPrimary"
+        app:layout_constraintTop_toBottomOf="@id/tvRoomFilter"
+        >
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroupRooms"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/tvTimeFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/text_filter_time"
+        android:textAppearance="?attr/textAppearanceHeadline5"
+        android:textColor="?attr/colorOnSurface"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scrollViewRooms"
+        />
+
+    <com.google.android.material.slider.RangeSlider
+        android:id="@+id/sliderTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/time_filter_slider_margin_horizontal"
+        android:layout_marginTop="5dp"
+        android:stepSize="1.0"
+        android:valueFrom="0"
+        android:valueTo="24"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTimeFilter"
+        app:values="@array/slider_default_values"
+        />
+
+    <TextView
+        android:id="@+id/tvTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?attr/textAppearanceHeadline5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sliderTime"
+        tools:text="05-24"
+        />
+
+    <Button
+        android:id="@+id/btnApply"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/apply_text"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTime"
+        />
+
+    <ImageView
+        android:id="@+id/ivReset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:contentDescription="@string/desc_reset_filter"
+        android:src="@drawable/ic_reset_thin"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@id/btnApply"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/btnApply"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>
