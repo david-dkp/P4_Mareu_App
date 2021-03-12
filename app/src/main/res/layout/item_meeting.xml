@@ -7,57 +7,60 @@
     >
 
     <ImageView
-        android:src="@drawable/meeting_room_image_foreground"
         android:id="@+id/ivMeetingIcon"
         android:layout_width="@dimen/meeting_icon_size"
         android:layout_height="@dimen/meeting_icon_size"
         android:contentDescription="@string/desc_meeting_icon"
         android:padding="@dimen/meeting_icon_padding"
         android:scaleType="centerCrop"
+        android:src="@drawable/meeting_room_image_foreground"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:tint="@color/green"
         />
 
     <ImageView
-        app:layout_constraintLeft_toRightOf="@id/tvMeetingInfo"
-        android:contentDescription="@string/desc_delete_meeting"
         android:id="@+id/ivDeleteIcon"
         android:layout_width="@dimen/meeting_delete_icon_size"
         android:layout_height="@dimen/meeting_delete_icon_size"
+        android:layout_margin="@dimen/meeting_delete_icon_margin"
+        android:contentDescription="@string/desc_delete_meeting"
+        android:src="@drawable/ic_delete"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/tvMeetingInfo"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_margin="@dimen/meeting_delete_icon_margin"
-        android:src="@drawable/ic_delete"
         app:tint="@color/violet_dark"
         />
 
     <TextView
-        android:singleLine="true"
-        app:layout_constraintVertical_chainStyle="packed"
-        app:layout_constraintLeft_toRightOf="@id/ivMeetingIcon"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/tvMeetingParticipants"
-        app:layout_constraintRight_toLeftOf="@id/ivDeleteIcon"
         android:id="@+id/tvMeetingInfo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:singleLine="true"
         android:textAppearance="?attr/textAppearanceListItem"
         android:textStyle="bold"
-        tools:text="Réunion A - 14h00 - Peach"/>
+        app:layout_constraintBottom_toTopOf="@id/tvMeetingParticipants"
+        app:layout_constraintLeft_toRightOf="@id/ivMeetingIcon"
+        app:layout_constraintRight_toLeftOf="@id/ivDeleteIcon"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="Réunion A - 14h00 - Peach"
+        />
 
     <TextView
-        android:singleLine="true"
-        app:layout_constraintLeft_toRightOf="@id/ivMeetingIcon"
-        app:layout_constraintTop_toBottomOf="@id/tvMeetingInfo"
-        app:layout_constraintRight_toRightOf="@id/tvMeetingInfo"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:id="@+id/tvMeetingParticipants"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        tools:text="maxime@lamzone.com, alex@lamzon.com"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:textAppearance="?attr/textAppearanceCaption"
         android:textColor="?attr/colorOnSurface"
-        android:textAppearance="?attr/textAppearanceCaption"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/ivMeetingIcon"
+        app:layout_constraintRight_toRightOf="@id/tvMeetingInfo"
+        app:layout_constraintTop_toBottomOf="@id/tvMeetingInfo"
+        tools:text="maxime@lamzone.com, alex@lamzon.com"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
