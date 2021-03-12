@@ -4,54 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/coordinatorMeetingList"
     tools:context=".activities.MeetingListActivity"
     >
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        >
 
         <com.google.android.material.appbar.MaterialToolbar
-            app:layout_scrollFlags="enterAlways"
-            style="@style/Widget.MaterialComponents.Toolbar.Primary"
             android:id="@+id/toolbar"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_scrollFlags="enterAlways"
             app:menu="@menu/menu_actionbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:visibility="gone"
-            android:id="@+id/filterContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-            <com.google.android.material.tabs.TabLayout
-                style="@style/Widget.Maréu.TabLayout"
-                app:layout_constraintTop_toTopOf="parent"
-                android:id="@+id/tabLayoutFilter"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
-
-                <com.google.android.material.tabs.TabItem
-                    android:text="@string/text_filter_room"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-                <com.google.android.material.tabs.TabItem
-                    android:text="@string/text_filter_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-            </com.google.android.material.tabs.TabLayout>
-
-            <androidx.viewpager2.widget.ViewPager2
-                app:layout_constraintTop_toBottomOf="@id/tabLayoutFilter"
-                android:id="@+id/viewPagerFilter"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/view_pager_filter_height" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            />
 
     </com.google.android.material.appbar.AppBarLayout>
 
