@@ -1,20 +1,59 @@
 package fr.feepin.maru.presenters;
 
+import android.os.Handler;
+import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import fr.feepin.maru.data.local.MeetingApi;
 import fr.feepin.maru.models.Meeting;
+import fr.feepin.maru.models.MeetingListFilterData;
+import fr.feepin.maru.models.Room;
+import fr.feepin.maru.utils.DateUtil;
 import fr.feepin.maru.views.MeetingListMvpView;
 
 public class MeetingListPresenter extends BasePresenter<MeetingListMvpView> implements MeetingListMvpPresenter {
 
-    private boolean filterOpened;
+    private MeetingListFilterData filterData;
+    private Handler handler;
 
     public MeetingListPresenter(MeetingApi meetingApi) {
         super(meetingApi);
-        filterOpened = false;
+        handler = new Handler();
     }
 
     private void updateMeetingList() {
-        getView().setMeetingListData(getMeetingApi().getMeetings());
+        if (filterData == null) {
+            getView().setMeetingListData(getMeetingApi().getMeetings());
+        } else {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    long startingTime = filterData.getStartingTimeMillis();
+                    long endingTime = filterData.getEndingTimeMillis();
+                    List<Room> selectedRooms = filterData.getSelectedRooms();
+
+                    List<Meeting> meetings = getMeetingApi().getMeetings();
+                    ArrayList<Meeting> filteredList = new ArrayList<>();
+
+                    for (Meeting meeting : meetings) {
+                        boolean isInRange = meeting.getStartingTime() < endingTime && meeting.getStartingTime() >= startingTime;
+                        if (selectedRooms.size() == 0 && isInRange) {
+                            filteredList.add(meeting);
+                        } else if (selectedRooms.contains(meeting.getRoom()) && isInRange) {
+                            filteredList.add(meeting);
+                        }
+                    }
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            getView().setMeetingListData(filteredList);
+                        }
+                    });
+                }
+            }).start();
+        }
     }
 
     @Override
@@ -31,21 +70,12 @@ public class MeetingListPresenter extends BasePresenter<MeetingListMvpView> impl
 
     @Override
     public void onFilterIconClick() {
-
+        getView().openFilterDialog();
     }
 
     @Override
-    public void onRangeTimeChange(long startingTimeMillis, long endingTimeMillis) {
-
-    }
-
-    @Override
-    public void onPlaceFilterSelect(String place) {
-
-    }
-
-    @Override
-    public void onPlaceFilterUnselect(String place) {
-
+    public void onFilterDataReceive(MeetingListFilterData filterData) {
+        this.filterData = filterData;
+        updateMeetingList();
     }
 }

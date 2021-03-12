@@ -5,10 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.transition.AutoTransition;
-import android.transition.ChangeBounds;
-import android.transition.ChangeTransform;
 import android.transition.Transition;
 import android.transition.TransitionManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,21 +19,27 @@ import fr.feepin.maru.R;
 import fr.feepin.maru.adapters.MeetingListAdapter;
 import fr.feepin.maru.data.local.FakeMeetingApi;
 import fr.feepin.maru.databinding.ActivityMeetingListBinding;
+import fr.feepin.maru.dialogs.FilterDialog;
 import fr.feepin.maru.models.Meeting;
+import fr.feepin.maru.models.MeetingListFilterData;
 import fr.feepin.maru.presenters.MeetingListMvpPresenter;
 import fr.feepin.maru.presenters.MeetingListPresenter;
 import fr.feepin.maru.views.MeetingListMvpView;
 
-public class MeetingListActivity extends AppCompatActivity implements MeetingListMvpView, MeetingListAdapter.OnMeetingDelete {
+public class MeetingListActivity extends AppCompatActivity implements
+        MeetingListMvpView,
+        MeetingListAdapter.OnMeetingDelete,
+        FilterDialog.OnFilterDataReceiveListener
+{
 
     private ActivityMeetingListBinding binding;
     private MeetingListAdapter meetingListAdapter;
     private MeetingListMvpPresenter meetingListPresenter;
+    private FilterDialog filterDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         //Binding and inflating view
         binding = ActivityMeetingListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -42,6 +47,7 @@ public class MeetingListActivity extends AppCompatActivity implements MeetingLis
         setupToolbar();
 
         //Init datas
+        filterDialog = new FilterDialog();
         meetingListAdapter = new MeetingListAdapter(this);
         setupRecyclerView();
 
@@ -53,12 +59,14 @@ public class MeetingListActivity extends AppCompatActivity implements MeetingLis
     protected void onStart() {
         super.onStart();
         meetingListPresenter.onAttachView(this);
+        filterDialog.setOnFilterDataReceiveListener(this);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         meetingListPresenter.onDetachView();
+        filterDialog.setOnFilterDataReceiveListener(null);
     }
 
     @Override
@@ -69,7 +77,7 @@ public class MeetingListActivity extends AppCompatActivity implements MeetingLis
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.filter) {
+        if (item.getItemId() == R.id.filter && !filterDialog.isAdded()) {
             meetingListPresenter.onFilterIconClick();
             return true;
         }
@@ -106,10 +114,12 @@ public class MeetingListActivity extends AppCompatActivity implements MeetingLis
     }
 
     @Override
-    public void toggleFilterView(boolean open) {
-        Transition transition = new AutoTransition();
-        transition.setDuration(getResources().getInteger(R.integer.filter_entering_animation_duration));
-        TransitionManager.beginDelayedTransition(binding.getRoot(), transition);
-        binding.filterContainer.setVisibility(open ? View.VISIBLE : View.GONE);
+    public void openFilterDialog() {
+        filterDialog.show(getSupportFragmentManager(), "Dialog");
+    }
+
+    @Override
+    public void onFilterDataReceive(MeetingListFilterData filterData) {
+        meetingListPresenter.onFilterDataReceive(filterData);
     }
 }
