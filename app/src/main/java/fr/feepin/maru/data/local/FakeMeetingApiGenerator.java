@@ -52,6 +52,13 @@ public class FakeMeetingApiGenerator {
             new Meeting(6, DateUtil.getDateMillisFromTime(8, 30), Room.TOAD, "Briefing", generateRandomParticipants(8)),
             new Meeting(7, DateUtil.getDateMillisFromTime(15, 00), Room.WALUIGI, "Brainstorming", generateRandomParticipants(6)),
             new Meeting(8, DateUtil.getDateMillisFromTime(19, 20), Room.DK, "Review", generateRandomParticipants(2)),
+            new Meeting(9, DateUtil.getDateMillisFromTime(7, 45), Room.LUIGI, "Daily", generateRandomParticipants(1)),
+            new Meeting(10, DateUtil.getDateMillisFromTime(19, 45), Room.MARIO, "Recap", generateRandomParticipants(4)),
+            new Meeting(11, DateUtil.getDateMillisFromTime(10, 20), Room.DAISY, "Design", generateRandomParticipants(3)),
+            new Meeting(12, DateUtil.getDateMillisFromTime(11, 25), Room.BROWSER, "CodeReview", generateRandomParticipants(6)),
+            new Meeting(13, DateUtil.getDateMillisFromTime(16, 20), Room.WALUIGI, "Code Architecture", generateRandomParticipants(8)),
+            new Meeting(14, DateUtil.getDateMillisFromTime(15, 15), Room.ROSALINA, "Design", generateRandomParticipants(3)),
+
     };
 
 }
