@@ -3,8 +3,10 @@ package fr.feepin.maru.adapters;
 import android.annotation.SuppressLint;
 import android.content.res.ColorStateList;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -19,6 +21,8 @@ import fr.feepin.maru.utils.DateFormatUtil;
 import fr.feepin.maru.utils.StringUtil;
 
 public class MeetingListAdapter extends ListAdapter<Meeting, MeetingListAdapter.ViewHolder> {
+
+    private TextView selectedTextView;
 
     private static final DiffUtil.ItemCallback<Meeting> diffCallback = new DiffUtil.ItemCallback<Meeting>() {
         @Override
@@ -71,6 +75,7 @@ public class MeetingListAdapter extends ListAdapter<Meeting, MeetingListAdapter.
             binding.ivDeleteIcon.setOnClickListener(view -> onMeetingDeleteListener.onMeetingDelete(getCurrentList().get(getAdapterPosition())));
         }
 
+        @SuppressLint("ClickableViewAccessibility")
         public void bind(Meeting meeting) {
             binding.tvMeetingInfo.setText(
                     String.format("%s - %s - %s", binding.getRoot().getContext().getString(meeting.getRoom().getRoomName()), DateFormatUtil.formatToTime(meeting.getStartingTime()), meeting.getSubject())
@@ -82,6 +87,23 @@ public class MeetingListAdapter extends ListAdapter<Meeting, MeetingListAdapter.
                             meeting.getRoom().getRoomColor()
                     )
             ));
+            binding.getRoot().setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                        if (selectedTextView == binding.tvMeetingParticipants) return false;
+                        if (selectedTextView != null) {
+                            selectedTextView.setSelected(false);
+                            binding.tvMeetingParticipants.setSelected(true);
+                            selectedTextView = binding.tvMeetingParticipants;
+                        } else {
+                            binding.tvMeetingParticipants.setSelected(true);
+                            selectedTextView = binding.tvMeetingParticipants;
+                        }
+                    }
+                    return false;
+                }
+            });
         }
 
     }
