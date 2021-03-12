@@ -9,33 +9,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MeetingListFilterData {
-    private final ArrayList<String> places;
+
+    private final List<Room> selectedRooms;
     private long startingTimeMillis;
     private long endingTimeMillis;
 
-    public MeetingListFilterData() {
-        this.places = new ArrayList<String>();
-        this.startingTimeMillis = 0;
-        this.endingTimeMillis = 0;
+    public MeetingListFilterData(List<Room> selectedRooms, long startingTimeMillis, long endingTimeMillis) {
+        this.selectedRooms = selectedRooms;
+        this.startingTimeMillis = startingTimeMillis;
+        this.endingTimeMillis = endingTimeMillis;
     }
 
-    public ArrayList<String> getPlaces() {
-        return places;
+    public List<Room> getSelectedRooms() {
+        return selectedRooms;
     }
 
     public long getStartingTimeMillis() {
         return startingTimeMillis;
     }
 
-    public void setStartingTimeMillis(long startingTimeMillis) {
-        this.startingTimeMillis = startingTimeMillis;
-    }
-
     public long getEndingTimeMillis() {
         return endingTimeMillis;
     }
 
-    public void setEndingTimeMillis(long endingTimeMillis) {
-        this.endingTimeMillis = endingTimeMillis;
-    }
 }
