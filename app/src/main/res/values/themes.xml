@@ -13,12 +13,8 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-    </style>
 
-    <style name="Widget.Maréu.TabLayout" parent="Widget.MaterialComponents.TabLayout" >
-        <item name="tabIndicator">@null</item>
-        <item name="tabSelectedTextColor">?attr/colorOnSurface</item>
-        <item name="tabTextAppearance">?attr/textAppearanceHeadline5</item>
+        <item name="android:spinnerItemStyle">?attr/textAppearanceHeadline5</item>
     </style>
 
 </resources>

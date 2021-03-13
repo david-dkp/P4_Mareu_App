@@ -19,4 +19,6 @@
     <dimen name="add_meeting_content_margin_left">30dp</dimen>
     <dimen name="add_meeting_participants_rv_height">180dp</dimen>
     <dimen name="item_participant_height">60dp</dimen>
+    <dimen name="add_meeting_add_participant_rv_height">200dp</dimen>
+    <dimen name="add_meeting_add_participant_rv_width">300dp</dimen>
 </resources>

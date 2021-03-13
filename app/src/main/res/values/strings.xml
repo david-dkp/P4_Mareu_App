@@ -34,5 +34,6 @@
     <string name="desc_add_participant">Add a participant</string>
     <string name="text_add_meeting_time">Time : </string>
     <string name="title_add_meeting">Add Meeting</string>
+    <string name="text_subject">Subject</string>
 
 </resources>
