@@ -1,28 +1,19 @@
 package fr.feepin.maru.dialogs;
 
 import android.content.DialogInterface;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 
-import com.google.android.material.chip.Chip;
 import com.google.android.material.slider.RangeSlider;
 
-import java.util.List;
-
-import fr.feepin.maru.R;
 import fr.feepin.maru.adapters.RoomsChipAdapter;
 import fr.feepin.maru.data.local.FakeMeetingApi;
-import fr.feepin.maru.data.local.MeetingApi;
 import fr.feepin.maru.databinding.DialogFilterBinding;
 import fr.feepin.maru.models.MeetingListFilterData;
 import fr.feepin.maru.models.Room;
@@ -53,6 +44,9 @@ public class FilterDialog extends DialogFragment implements FilterDialogMvpView,
         roomsChipAdapter = new RoomsChipAdapter(binding.chipGroupRooms, this);
         presenter.onAttachView(this);
 
+        binding.scrollViewRooms.setSaveEnabled(false);
+        binding.sliderTime.setSaveEnabled(false);
+        binding.tvTime.setText("0-24");
         binding.sliderTime.addOnChangeListener(new RangeSlider.OnChangeListener() {
             @Override
             public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
