@@ -3,6 +3,8 @@ package fr.feepin.maru.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.SharedElementCallback;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,8 +26,7 @@ import fr.feepin.maru.views.MeetingListMvpView;
 public class MeetingListActivity extends AppCompatActivity implements
         MeetingListMvpView,
         MeetingListAdapter.OnMeetingDelete,
-        FilterDialog.OnFilterDataReceiveListener
-{
+        FilterDialog.OnFilterDataReceiveListener {
 
     private ActivityMeetingListBinding binding;
     private MeetingListAdapter meetingListAdapter;
@@ -39,15 +40,33 @@ public class MeetingListActivity extends AppCompatActivity implements
         binding = ActivityMeetingListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        setupToolbar();
-
         //Init datas
         filterDialog = new FilterDialog();
-        meetingListAdapter = new MeetingListAdapter(this);
+
+        //Setup
         setupRecyclerView();
+        setupFab();
+        setupToolbar();
 
         //Init presenter
         meetingListPresenter = new MeetingListPresenter(FakeMeetingApi.getInstance());
+    }
+
+    private void setupRecyclerView() {
+        meetingListAdapter = new MeetingListAdapter(this);
+        binding.rvMeetings.setAdapter(meetingListAdapter);
+    }
+
+    private void setupFab() {
+        binding.fabAddMeeting.setOnClickListener((v) -> {
+            binding.fabAddMeeting.setEnabled(false);
+            Intent intent = new Intent(this, AddMeetingActivity.class);
+            startActivity(intent);
+        });
+    }
+
+    private void setupToolbar() {
+        setSupportActionBar(binding.toolbar);
     }
 
     @Override
@@ -55,6 +74,7 @@ public class MeetingListActivity extends AppCompatActivity implements
         super.onStart();
         meetingListPresenter.onAttachView(this);
         filterDialog.setOnFilterDataReceiveListener(this);
+        binding.fabAddMeeting.setEnabled(true);
     }
 
     @Override
@@ -84,14 +104,6 @@ public class MeetingListActivity extends AppCompatActivity implements
         meetingListPresenter.onDeleteMeetingIconClick(meeting);
     }
 
-    private void setupRecyclerView() {
-        binding.rvMeetings.setAdapter(meetingListAdapter);
-    }
-
-    private void setupToolbar() {
-        setSupportActionBar(binding.toolbar);
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_meeting_list_toolbar, menu);
@@ -101,11 +113,6 @@ public class MeetingListActivity extends AppCompatActivity implements
     @Override
     public void setMeetingListData(List<Meeting> meetingList) {
         meetingListAdapter.submitList(new ArrayList<>(meetingList));
-    }
-
-    @Override
-    public void navigateToAddActivity() {
-
     }
 
     @Override
