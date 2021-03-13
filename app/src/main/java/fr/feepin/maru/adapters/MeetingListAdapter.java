@@ -2,6 +2,7 @@ package fr.feepin.maru.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.res.ColorStateList;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -72,7 +73,10 @@ public class MeetingListAdapter extends ListAdapter<Meeting, MeetingListAdapter.
         public ViewHolder(View rootView) {
             super(rootView);
             binding = ItemMeetingBinding.bind(rootView);
-            binding.ivDeleteIcon.setOnClickListener(view -> onMeetingDeleteListener.onMeetingDelete(getCurrentList().get(getAdapterPosition())));
+            binding.ivDeleteIcon.setOnClickListener(view -> {
+                if (getAdapterPosition() == -1) return;
+                onMeetingDeleteListener.onMeetingDelete(getCurrentList().get(getAdapterPosition()));
+            });
         }
 
         @SuppressLint("ClickableViewAccessibility")
