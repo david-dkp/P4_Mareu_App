@@ -72,11 +72,6 @@ public class AddMeetingPresenter extends BasePresenter<AddMeetingMvpView> implem
     }
 
     @Override
-    public void onCloseItemClick() {
-        getView().closeActivity();
-    }
-
-    @Override
     public void onSubjectChange(String input) {
         this.subject = input;
     }
