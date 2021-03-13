@@ -1,12 +1,13 @@
 package fr.feepin.maru.data.local;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 import fr.feepin.maru.models.Meeting;
+import fr.feepin.maru.models.Room;
+import fr.feepin.maru.utils.DateUtil;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -25,8 +26,8 @@ public class MeetingApiTest {
     public void addingMeeting_withSuccess() {
         Meeting meeting = new Meeting(
                 45,
-                FakeMeetingApiGenerator.getTimeInMillis(10, 10),
-                "Here",
+                DateUtil.getDateMillisFromTime(10, 10),
+                Room.DAISY,
                 "Subject",
                 FakeMeetingApiGenerator.generateRandomParticipants(2)
         );
@@ -39,8 +40,8 @@ public class MeetingApiTest {
     public void deletingMeeting_withSuccess() {
         Meeting meeting = new Meeting(
                 45,
-                FakeMeetingApiGenerator.getTimeInMillis(10, 10),
-                "Here",
+                DateUtil.getDateMillisFromTime(10, 10),
+                Room.MARIO,
                 "Subject",
                 FakeMeetingApiGenerator.generateRandomParticipants(2)
         );

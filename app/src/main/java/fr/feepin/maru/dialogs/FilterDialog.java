@@ -17,8 +17,8 @@ import fr.feepin.maru.data.local.FakeMeetingApi;
 import fr.feepin.maru.databinding.DialogFilterBinding;
 import fr.feepin.maru.models.MeetingListFilterData;
 import fr.feepin.maru.models.Room;
-import fr.feepin.maru.presenters.FilterDialogMvpPresenter;
-import fr.feepin.maru.presenters.FilterDialogPresenter;
+import fr.feepin.maru.presenters.interfaces.FilterDialogMvpPresenter;
+import fr.feepin.maru.presenters.impl.FilterDialogPresenter;
 import fr.feepin.maru.views.FilterDialogMvpView;
 
 public class FilterDialog extends DialogFragment implements FilterDialogMvpView, RoomsChipAdapter.OnRoomSelectListener {

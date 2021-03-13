@@ -1,16 +1,16 @@
-package fr.feepin.maru.presenters;
+package fr.feepin.maru.presenters.impl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import fr.feepin.maru.data.local.FakeMeetingApiGenerator;
 import fr.feepin.maru.data.local.MeetingApi;
 import fr.feepin.maru.models.Meeting;
 import fr.feepin.maru.models.Room;
+import fr.feepin.maru.presenters.interfaces.AddMeetingMvpPresenter;
 import fr.feepin.maru.views.AddMeetingMvpView;
 
-public class AddMeetingPresenter extends BasePresenter<AddMeetingMvpView> implements AddMeetingMvpPresenter{
+public class AddMeetingPresenter extends BasePresenter<AddMeetingMvpView> implements AddMeetingMvpPresenter {
 
     private Room selectedRoom;
     private long timeInMillis;

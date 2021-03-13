@@ -1,7 +1,6 @@
-package fr.feepin.maru.presenters;
+package fr.feepin.maru.presenters.impl;
 
 import android.os.Handler;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +9,7 @@ import fr.feepin.maru.data.local.MeetingApi;
 import fr.feepin.maru.models.Meeting;
 import fr.feepin.maru.models.MeetingListFilterData;
 import fr.feepin.maru.models.Room;
-import fr.feepin.maru.utils.DateUtil;
+import fr.feepin.maru.presenters.interfaces.MeetingListMvpPresenter;
 import fr.feepin.maru.views.MeetingListMvpView;
 
 public class MeetingListPresenter extends BasePresenter<MeetingListMvpView> implements MeetingListMvpPresenter {

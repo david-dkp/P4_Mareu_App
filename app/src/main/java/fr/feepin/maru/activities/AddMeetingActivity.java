@@ -4,13 +4,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,7 +17,6 @@ import androidx.transition.TransitionManager;
 import com.google.android.material.transition.MaterialContainerTransform;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import fr.feepin.maru.R;
@@ -31,8 +26,8 @@ import fr.feepin.maru.adapters.RoomSpinnerAdapter;
 import fr.feepin.maru.data.local.FakeMeetingApi;
 import fr.feepin.maru.databinding.ActivityAddMeetingBinding;
 import fr.feepin.maru.models.Room;
-import fr.feepin.maru.presenters.AddMeetingMvpPresenter;
-import fr.feepin.maru.presenters.AddMeetingPresenter;
+import fr.feepin.maru.presenters.interfaces.AddMeetingMvpPresenter;
+import fr.feepin.maru.presenters.impl.AddMeetingPresenter;
 import fr.feepin.maru.utils.DateUtil;
 import fr.feepin.maru.views.AddMeetingMvpView;
 

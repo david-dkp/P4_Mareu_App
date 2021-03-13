@@ -3,7 +3,6 @@ package fr.feepin.maru.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.SharedElementCallback;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -19,8 +18,8 @@ import fr.feepin.maru.databinding.ActivityMeetingListBinding;
 import fr.feepin.maru.dialogs.FilterDialog;
 import fr.feepin.maru.models.Meeting;
 import fr.feepin.maru.models.MeetingListFilterData;
-import fr.feepin.maru.presenters.MeetingListMvpPresenter;
-import fr.feepin.maru.presenters.MeetingListPresenter;
+import fr.feepin.maru.presenters.interfaces.MeetingListMvpPresenter;
+import fr.feepin.maru.presenters.impl.MeetingListPresenter;
 import fr.feepin.maru.views.MeetingListMvpView;
 
 public class MeetingListActivity extends AppCompatActivity implements

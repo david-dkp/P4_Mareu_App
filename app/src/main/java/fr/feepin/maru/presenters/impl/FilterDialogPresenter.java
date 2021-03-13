@@ -1,6 +1,4 @@
-package fr.feepin.maru.presenters;
-
-import android.util.Log;
+package fr.feepin.maru.presenters.impl;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -10,6 +8,7 @@ import java.util.Map;
 import fr.feepin.maru.data.local.MeetingApi;
 import fr.feepin.maru.models.MeetingListFilterData;
 import fr.feepin.maru.models.Room;
+import fr.feepin.maru.presenters.interfaces.FilterDialogMvpPresenter;
 import fr.feepin.maru.views.FilterDialogMvpView;
 
 public class FilterDialogPresenter extends BasePresenter<FilterDialogMvpView> implements FilterDialogMvpPresenter {

@@ -1,4 +1,4 @@
-package fr.feepin.maru.presenters;
+package fr.feepin.maru.presenters.interfaces;
 
 import fr.feepin.maru.models.Room;
 import fr.feepin.maru.views.FilterDialogMvpView;
