@@ -65,7 +65,7 @@ public class AddMeetingPresenter extends BasePresenter<AddMeetingMvpView> implem
                 selectedRoom,
                 subject,
                 participants
-                );
+        );
 
         getMeetingApi().addMeeting(meeting);
         getView().closeActivity();

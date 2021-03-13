@@ -29,7 +29,7 @@ public class RoomsChipAdapter {
     }
 
     private void createChips() {
-        for(Room room : Room.values()) {
+        for (Room room : Room.values()) {
             Chip chip = (Chip) LayoutInflater.from(context).inflate(R.layout.item_room_filter, chipGroup, false);
 
             int[][] colorStates = {
@@ -62,8 +62,9 @@ public class RoomsChipAdapter {
         }
     }
 
-    public interface OnRoomSelectListener{
+    public interface OnRoomSelectListener {
         void onRoomSelect(Room room);
+
         void onRoomUnselect(Room room);
     }
 }

@@ -63,6 +63,21 @@ public class AddMeetingActivity extends AppCompatActivity implements
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_add_meeting_toolbar, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.addMeeting) {
+            presenter.onAddMeetingItemClick();
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
@@ -81,6 +96,14 @@ public class AddMeetingActivity extends AppCompatActivity implements
         presenter.onDetachView();
     }
 
+    private void setupParticipantRecyclerView() {
+        participantListAdapter = new ParticipantListAdapter(this);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+
+        binding.rvParticipants.setLayoutManager(linearLayoutManager);
+        binding.rvParticipants.setAdapter(participantListAdapter);
+    }
+
     private void setupAddParticipantRecyclerView() {
         addParticipantListAdapter = new AddParticipantListAdapter(this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -95,14 +118,6 @@ public class AddMeetingActivity extends AppCompatActivity implements
                 presenter.onScrimClick();
             }
         });
-    }
-
-    private void setupParticipantRecyclerView() {
-        participantListAdapter = new ParticipantListAdapter(this);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-
-        binding.rvParticipants.setLayoutManager(linearLayoutManager);
-        binding.rvParticipants.setAdapter(participantListAdapter);
     }
 
     private void setupAddParticipantButton() {
@@ -144,23 +159,6 @@ public class AddMeetingActivity extends AppCompatActivity implements
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_add_meeting_toolbar, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
-        if (item.getItemId() == R.id.addMeeting) {
-            presenter.onAddMeetingItemClick();
-            return true;
-        }
-
-        return false;
-    }
-
-    @Override
     public void onAddParticipantClick(String email) {
         presenter.onAddParticipantClick(email);
     }
@@ -168,6 +166,11 @@ public class AddMeetingActivity extends AppCompatActivity implements
     @Override
     public void onParticipantClick(String email) {
         presenter.onParticipantClick(email);
+    }
+
+    @Override
+    public void onRoomSelect(Room room) {
+        presenter.onRoomSelect(room);
     }
 
     @Override
@@ -197,10 +200,5 @@ public class AddMeetingActivity extends AppCompatActivity implements
     @Override
     public void closeActivity() {
         finish();
-    }
-
-    @Override
-    public void onRoomSelect(Room room) {
-        presenter.onRoomSelect(room);
     }
 }

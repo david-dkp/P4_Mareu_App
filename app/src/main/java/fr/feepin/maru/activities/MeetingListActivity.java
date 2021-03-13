@@ -69,6 +69,21 @@ public class MeetingListActivity extends AppCompatActivity implements
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_meeting_list_toolbar, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.filter && !filterDialog.isAdded()) {
+            meetingListPresenter.onFilterIconClick();
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     protected void onStart() {
         super.onStart();
         meetingListPresenter.onAttachView(this);
@@ -90,23 +105,13 @@ public class MeetingListActivity extends AppCompatActivity implements
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.filter && !filterDialog.isAdded()) {
-            meetingListPresenter.onFilterIconClick();
-            return true;
-        }
-        return false;
-    }
-
-    @Override
     public void onMeetingDelete(Meeting meeting) {
         meetingListPresenter.onDeleteMeetingIconClick(meeting);
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_meeting_list_toolbar, menu);
-        return super.onCreateOptionsMenu(menu);
+    public void onFilterDataReceive(MeetingListFilterData filterData) {
+        meetingListPresenter.onFilterDataReceive(filterData);
     }
 
     @Override
@@ -119,8 +124,4 @@ public class MeetingListActivity extends AppCompatActivity implements
         filterDialog.show(getSupportFragmentManager(), "Dialog");
     }
 
-    @Override
-    public void onFilterDataReceive(MeetingListFilterData filterData) {
-        meetingListPresenter.onFilterDataReceive(filterData);
-    }
 }
