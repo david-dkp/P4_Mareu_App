@@ -16,13 +16,15 @@
         />
 
     <androidx.core.widget.NestedScrollView
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            >
 
             <TextView
                 android:id="@+id/tvRoom"
@@ -97,5 +99,29 @@
 
     </androidx.core.widget.NestedScrollView>
 
+    <View
+        android:id="@+id/scrim"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="?attr/scrimBackground"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:visibility="invisible"
+        android:id="@+id/rvAddParticipant"
+        android:layout_width="@dimen/add_meeting_add_participant_rv_width"
+        android:layout_height="@dimen/add_meeting_add_participant_rv_height"
+        android:layout_marginEnd="40dp"
+        android:background="?attr/colorSurface"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/item_add_participant"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
