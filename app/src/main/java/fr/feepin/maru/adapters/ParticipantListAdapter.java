@@ -14,7 +14,7 @@ import fr.feepin.maru.databinding.ItemParticipantBinding;
 
 public class ParticipantListAdapter extends ListAdapter<String, ParticipantListAdapter.ViewHolder> {
 
-    private OnItemClickListener listener;
+    private OnParticipantClickListener listener;
 
     private static DiffUtil.ItemCallback<String> diffCallback = new DiffUtil.ItemCallback<String>() {
         @Override
@@ -28,7 +28,7 @@ public class ParticipantListAdapter extends ListAdapter<String, ParticipantListA
         }
     };
 
-    public ParticipantListAdapter(OnItemClickListener listener) {
+    public ParticipantListAdapter(OnParticipantClickListener listener) {
         super(diffCallback);
         this.listener = listener;
     }
@@ -58,12 +58,12 @@ public class ParticipantListAdapter extends ListAdapter<String, ParticipantListA
         public void bind(String email) {
             binding.tvParticipant.setText(email);
             binding.getRoot().setOnClickListener((v) -> {
-                listener.onClick(email);
+                listener.onParticipantClick(email);
             });
         }
     }
 
-    public interface OnItemClickListener {
-        void onClick(String email);
+    public interface OnParticipantClickListener {
+        void onParticipantClick(String email);
     }
 }

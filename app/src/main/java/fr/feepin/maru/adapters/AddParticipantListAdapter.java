@@ -11,11 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import fr.feepin.maru.R;
 import fr.feepin.maru.databinding.ItemAddParticipantBinding;
-import fr.feepin.maru.databinding.ItemParticipantBinding;
 
 public class AddParticipantListAdapter extends ListAdapter<String, AddParticipantListAdapter.ViewHolder> {
 
-    private OnItemClickListener listener;
+    private OnAddParticipantClickListener listener;
 
     private static DiffUtil.ItemCallback<String> diffCallback = new DiffUtil.ItemCallback<String>() {
         @Override
@@ -29,7 +28,7 @@ public class AddParticipantListAdapter extends ListAdapter<String, AddParticipan
         }
     };
 
-    public AddParticipantListAdapter(OnItemClickListener listener) {
+    public AddParticipantListAdapter(OnAddParticipantClickListener listener) {
         super(diffCallback);
         this.listener = listener;
     }
@@ -59,12 +58,12 @@ public class AddParticipantListAdapter extends ListAdapter<String, AddParticipan
         public void bind(String email) {
             binding.tvParticipant.setText(email);
             binding.getRoot().setOnClickListener((v) -> {
-                listener.onClick(email);
+                listener.onAddParticipantClick(email);
             });
         }
     }
 
-    public interface OnItemClickListener {
-        void onClick(String email);
+    public interface OnAddParticipantClickListener {
+        void onAddParticipantClick(String email);
     }
 }
