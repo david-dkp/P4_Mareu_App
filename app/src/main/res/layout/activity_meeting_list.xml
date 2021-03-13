@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:layout_scrollFlags="enterAlways"
-            app:menu="@menu/menu_actionbar"
+            app:menu="@menu/menu_meeting_list_toolbar"
             />
 
     </com.google.android.material.appbar.AppBarLayout>
