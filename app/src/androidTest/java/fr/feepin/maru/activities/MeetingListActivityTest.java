@@ -1,5 +1,7 @@
 package fr.feepin.maru.activities;
 
+import android.util.Log;
+
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.espresso.intent.Intents;
@@ -17,11 +19,14 @@ import java.util.List;
 import fr.feepin.maru.R;
 import fr.feepin.maru.actions.MeetingListRecyclerViewActions;
 import fr.feepin.maru.actions.RangeSliderChangeValuesAction;
-import fr.feepin.maru.assertions.ListAdapterAssertions;
+import fr.feepin.maru.actions.TimePickerAction;
+import fr.feepin.maru.assertions.MeetingListAdapterAssertions;
 import fr.feepin.maru.assertions.RecyclerViewAssertions;
+import fr.feepin.maru.data.local.FakeMeetingApi;
 import fr.feepin.maru.data.local.FakeMeetingApiGenerator;
 import fr.feepin.maru.models.Meeting;
 import fr.feepin.maru.models.Room;
+import fr.feepin.maru.utils.DateUtil;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
@@ -69,7 +74,7 @@ public class MeetingListActivityTest {
         onView(withId(R.id.filter)).perform(ViewActions.click());
         onView(withText("Mario")).perform(ViewActions.click());
         onView(withId(R.id.btnApply)).perform(ViewActions.click());
-        onView(withId(R.id.rvMeetings)).check(ListAdapterAssertions.containsOnly(expectedMeetings));
+        onView(withId(R.id.rvMeetings)).check(MeetingListAdapterAssertions.containsOnly(expectedMeetings));
     }
 
     @Test
@@ -89,7 +94,45 @@ public class MeetingListActivityTest {
         onView(withId(R.id.filter)).perform(ViewActions.click());
         onView(withId(R.id.sliderTime)).perform(new RangeSliderChangeValuesAction(startingHour, endingHour));
         onView(withId(R.id.btnApply)).perform(ViewActions.click());
-        onView(withId(R.id.rvMeetings)).check(ListAdapterAssertions.containsOnly(expectedMeetings));
+        onView(withId(R.id.rvMeetings)).check(MeetingListAdapterAssertions.containsOnly(expectedMeetings));
     }
 
+    @Test
+    public void addingMeeting_withSuccess() {
+        Meeting expectedNewMeeting = new Meeting(
+                FakeMeetingApi.getInstance().getMeetings().size()+1,
+                DateUtil.getDateMillisFromTime(17, 30),
+                Room.DAISY,
+                "Brainstorming",
+                Arrays.asList(FakeMeetingApiGenerator.fakeEmails[2], FakeMeetingApiGenerator.fakeEmails[7])
+                );
+
+        onView(withId(R.id.fabAddMeeting)).perform(ViewActions.click());
+
+        //Subject
+        onView(withId(R.id.editTextSubject)).perform(ViewActions.typeText("Brainstorming"));
+
+        //Room
+        onView(withId(R.id.spinnerRooms)).perform(ViewActions.click());
+        onView(withText("DAISY")).perform(ViewActions.click());
+
+        //Participants
+        onView(withId(R.id.ivAddParticipant)).perform(ViewActions.click());
+        onView(withId(R.id.rvAddParticipant)).perform(
+                RecyclerViewActions.actionOnItemAtPosition(2, ViewActions.click())
+        );
+        onView(withId(R.id.ivAddParticipant)).perform(ViewActions.click());
+        onView(withId(R.id.rvAddParticipant)).perform(
+                RecyclerViewActions.actionOnItemAtPosition(6, ViewActions.click())
+        );
+
+        //Time
+        onView(withId(R.id.timePicker)).perform(new TimePickerAction(17, 30));
+
+
+        onView(withId(R.id.addMeeting)).perform(ViewActions.click());
+
+        Log.d("debug", expectedNewMeeting.toString());
+        onView(withId(R.id.rvMeetings)).check(MeetingListAdapterAssertions.contains(expectedNewMeeting));
+    }
 }
