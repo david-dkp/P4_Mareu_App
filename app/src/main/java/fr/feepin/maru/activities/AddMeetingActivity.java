@@ -7,6 +7,7 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,7 +35,6 @@ import fr.feepin.maru.views.AddMeetingMvpView;
 public class AddMeetingActivity extends AppCompatActivity implements
         ParticipantListAdapter.OnParticipantClickListener,
         AddParticipantListAdapter.OnAddParticipantClickListener,
-        RoomSpinnerAdapter.OnRoomSelectListener,
         AddMeetingMvpView {
 
     private ActivityAddMeetingBinding binding;
@@ -127,8 +127,20 @@ public class AddMeetingActivity extends AppCompatActivity implements
     }
 
     private void setupRoomSpinner() {
-        RoomSpinnerAdapter roomSpinnerAdapter = new RoomSpinnerAdapter(this, this);
+        RoomSpinnerAdapter roomSpinnerAdapter = new RoomSpinnerAdapter(this);
         binding.spinnerRooms.setAdapter(roomSpinnerAdapter);
+        binding.spinnerRooms.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                presenter.onRoomSelect(roomSpinnerAdapter.getItem(i));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         binding.spinnerRooms.setSelection(0);
         presenter.onRoomSelect(roomSpinnerAdapter.getItem(0));
     }
@@ -166,11 +178,6 @@ public class AddMeetingActivity extends AppCompatActivity implements
     @Override
     public void onParticipantClick(String email) {
         presenter.onParticipantClick(email);
-    }
-
-    @Override
-    public void onRoomSelect(Room room) {
-        presenter.onRoomSelect(room);
     }
 
     @Override
