@@ -56,4 +56,15 @@ public class Meeting {
     public void setId(int id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return "Meeting{" +
+                "id=" + id +
+                ", startingTime=" + startingTime +
+                ", room=" + room +
+                ", subject='" + subject + '\'' +
+                ", participantsEmail=" + participantsEmail +
+                '}';
+    }
 }
