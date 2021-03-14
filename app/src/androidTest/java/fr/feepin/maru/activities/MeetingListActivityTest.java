@@ -16,6 +16,7 @@ import java.util.List;
 
 import fr.feepin.maru.R;
 import fr.feepin.maru.actions.MeetingListRecyclerViewActions;
+import fr.feepin.maru.actions.RangeSliderChangeValuesAction;
 import fr.feepin.maru.assertions.ListAdapterAssertions;
 import fr.feepin.maru.assertions.RecyclerViewAssertions;
 import fr.feepin.maru.data.local.FakeMeetingApiGenerator;
@@ -45,7 +46,7 @@ public class MeetingListActivityTest {
     @Test
     public void onDeleteMeeting_recyclerView_shouldHaveFewerMeetings() {
         onView(withId(R.id.rvMeetings)).perform(RecyclerViewActions.actionOnItemAtPosition(3, MeetingListRecyclerViewActions.deleteItemAction()));
-        onView(withId(R.id.rvMeetings)).check(RecyclerViewAssertions.hasItemCount(FakeMeetingApiGenerator.fakeMeetings.length-1));
+        onView(withId(R.id.rvMeetings)).check(RecyclerViewAssertions.hasItemCount(FakeMeetingApiGenerator.fakeMeetings.length - 1));
     }
 
     @Test
@@ -67,6 +68,26 @@ public class MeetingListActivityTest {
 
         onView(withId(R.id.filter)).perform(ViewActions.click());
         onView(withText("Mario")).perform(ViewActions.click());
+        onView(withId(R.id.btnApply)).perform(ViewActions.click());
+        onView(withId(R.id.rvMeetings)).check(ListAdapterAssertions.containsOnly(expectedMeetings));
+    }
+
+    @Test
+    public void filteringByTime_withSuccess() {
+        List<Meeting> expectedMeetings = Arrays.asList(
+                FakeMeetingApiGenerator.fakeMeetings[0],
+                FakeMeetingApiGenerator.fakeMeetings[2],
+                FakeMeetingApiGenerator.fakeMeetings[4],
+                FakeMeetingApiGenerator.fakeMeetings[6],
+                FakeMeetingApiGenerator.fakeMeetings[12],
+                FakeMeetingApiGenerator.fakeMeetings[13]
+        );
+
+        int startingHour = 14;
+        int endingHour = 18;
+
+        onView(withId(R.id.filter)).perform(ViewActions.click());
+        onView(withId(R.id.sliderTime)).perform(new RangeSliderChangeValuesAction(startingHour, endingHour));
         onView(withId(R.id.btnApply)).perform(ViewActions.click());
         onView(withId(R.id.rvMeetings)).check(ListAdapterAssertions.containsOnly(expectedMeetings));
     }
