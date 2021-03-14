@@ -1,5 +1,7 @@
 package fr.feepin.maru.presenters.impl;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -60,7 +62,7 @@ public class AddMeetingPresenter extends BasePresenter<AddMeetingMvpView> implem
     @Override
     public void onAddMeetingItemClick() {
         Meeting meeting = new Meeting(
-                FakeMeetingApiGenerator.fakeMeetings.length,
+                getMeetingApi().getMeetings().size()+1,
                 timeInMillis,
                 selectedRoom,
                 subject,
