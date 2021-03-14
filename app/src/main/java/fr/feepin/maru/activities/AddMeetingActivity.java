@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,11 +43,20 @@ public class AddMeetingActivity extends AppCompatActivity implements
     private AddParticipantListAdapter addParticipantListAdapter;
     private AddMeetingMvpPresenter presenter;
 
+    private OnBackPressedCallback addParticipantViewBackPressCallback = new OnBackPressedCallback(false) {
+        @Override
+        public void handleOnBackPressed() {
+            toggleAddParticipantView(false);
+        }
+    };
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityAddMeetingBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        getOnBackPressedDispatcher().addCallback(this, addParticipantViewBackPressCallback);
 
         presenter = new AddMeetingPresenter(FakeMeetingApi.getInstance());
 
@@ -129,7 +139,7 @@ public class AddMeetingActivity extends AppCompatActivity implements
     private void setupRoomSpinner() {
         RoomSpinnerAdapter roomSpinnerAdapter = new RoomSpinnerAdapter(this);
         binding.spinnerRooms.setAdapter(roomSpinnerAdapter);
-        binding.spinnerRooms.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+        binding.spinnerRooms.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -192,6 +202,7 @@ public class AddMeetingActivity extends AppCompatActivity implements
 
     @Override
     public void toggleAddParticipantView(boolean open) {
+        addParticipantViewBackPressCallback.setEnabled(open);
         MaterialContainerTransform containerTransform = new MaterialContainerTransform();
         containerTransform.setStartView(open ? binding.ivAddParticipant : binding.rvAddParticipant);
         containerTransform.setEndView(open ? binding.rvAddParticipant : binding.ivAddParticipant);
