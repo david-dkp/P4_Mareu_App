@@ -114,7 +114,7 @@ public class MeetingListActivityTest {
 
         //Room
         onView(withId(R.id.spinnerRooms)).perform(ViewActions.click());
-        onView(withText("DAISY")).perform(ViewActions.click());
+        onView(withText("Daisy")).perform(ViewActions.click());
 
         //Participants
         onView(withId(R.id.ivAddParticipant)).perform(ViewActions.click());
