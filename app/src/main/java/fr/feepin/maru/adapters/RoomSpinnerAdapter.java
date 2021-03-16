@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import fr.feepin.maru.R;
 import fr.feepin.maru.models.Room;
 
 public class RoomSpinnerAdapter extends ArrayAdapter<Room> {
@@ -22,15 +23,14 @@ public class RoomSpinnerAdapter extends ArrayAdapter<Room> {
         inflater = LayoutInflater.from(context);
     }
 
-    @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+
         Room room = getItem(position);
-        View view = inflater.inflate(android.R.layout.simple_spinner_item, parent, false);
-        TextView textView = view.findViewById(android.R.id.text1);
+        View view = inflater.inflate(R.layout.item_subject, parent, false);
+        TextView textView = view.findViewById(R.id.tvSubject);
         textView.setText(getContext().getString(room.getRoomName()));
 
         return view;
     }
-
 }
