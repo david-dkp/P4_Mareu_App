@@ -3,6 +3,7 @@ package fr.feepin.maru.adapters;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.CompoundButton;
 
@@ -24,6 +25,7 @@ public class RoomsChipAdapter {
     public RoomsChipAdapter(ChipGroup chipGroup, OnRoomSelectListener listener) {
         this.listener = listener;
         this.chipGroup = chipGroup;
+        chipGroup.setSaveEnabled(false);
         this.context = chipGroup.getContext();
         createChips();
     }
@@ -31,7 +33,7 @@ public class RoomsChipAdapter {
     private void createChips() {
         for (Room room : Room.values()) {
             Chip chip = (Chip) LayoutInflater.from(context).inflate(R.layout.item_room_filter, chipGroup, false);
-
+            chip.setSaveEnabled(false);
             int[][] colorStates = {
                     {android.R.attr.state_checked},
                     {}
