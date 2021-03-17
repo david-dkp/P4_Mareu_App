@@ -204,15 +204,28 @@ public class AddMeetingActivity extends AppCompatActivity implements
     public void toggleAddParticipantView(boolean open) {
         addParticipantViewBackPressCallback.setEnabled(open);
         MaterialContainerTransform containerTransform = new MaterialContainerTransform();
-        containerTransform.setStartView(open ? binding.ivAddParticipant : binding.rvAddParticipant);
-        containerTransform.setEndView(open ? binding.rvAddParticipant : binding.ivAddParticipant);
-        containerTransform.addTarget(open ? binding.rvAddParticipant : binding.ivAddParticipant);
-        containerTransform.setScrimColor(Color.TRANSPARENT);
 
-        TransitionManager.beginDelayedTransition(binding.getRoot(), containerTransform);
-        binding.scrim.setVisibility(open ? View.VISIBLE : View.INVISIBLE);
-        binding.ivAddParticipant.setVisibility(open ? View.INVISIBLE : View.VISIBLE);
-        binding.rvAddParticipant.setVisibility(open ? View.VISIBLE : View.INVISIBLE);
+        if (open) {
+            containerTransform.setStartView(binding.ivAddParticipant);
+            containerTransform.setEndView(binding.rvAddParticipant);
+            containerTransform.addTarget(binding.rvAddParticipant);
+            containerTransform.setScrimColor(Color.TRANSPARENT);
+
+            TransitionManager.beginDelayedTransition(binding.getRoot(), containerTransform);
+            binding.scrim.setVisibility(View.VISIBLE);
+            binding.ivAddParticipant.setVisibility(View.INVISIBLE);
+            binding.rvAddParticipant.setVisibility(View.VISIBLE);
+        } else {
+            containerTransform.setStartView(binding.rvAddParticipant);
+            containerTransform.setEndView(binding.ivAddParticipant);
+            containerTransform.addTarget(binding.ivAddParticipant);
+            containerTransform.setScrimColor(Color.TRANSPARENT);
+
+            TransitionManager.beginDelayedTransition(binding.getRoot(), containerTransform);
+            binding.scrim.setVisibility(View.INVISIBLE);
+            binding.ivAddParticipant.setVisibility(View.VISIBLE);
+            binding.rvAddParticipant.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override
