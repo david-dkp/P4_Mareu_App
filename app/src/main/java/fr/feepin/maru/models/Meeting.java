@@ -1,6 +1,7 @@
 package fr.feepin.maru.models;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Meeting {
     private int id;
@@ -66,5 +67,22 @@ public class Meeting {
                 ", subject='" + subject + '\'' +
                 ", participantsEmail=" + participantsEmail +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Meeting meeting = (Meeting) o;
+        return id == meeting.id &&
+                startingTime == meeting.startingTime &&
+                room == meeting.room &&
+                Objects.equals(subject, meeting.subject) &&
+                Objects.equals(participantsEmail, meeting.participantsEmail);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, startingTime, room, subject, participantsEmail);
     }
 }

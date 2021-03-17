@@ -55,16 +55,8 @@ public class MeetingListAdapterAssertions {
         @Override
         public void check(View view, NoMatchingViewException noViewFoundException) {
             super.check(view, noViewFoundException);
-            for (Meeting meeting : meetings) {
-                Meeting meetingInAdapter = getListAdapter().getCurrentList().stream().filter((m) -> {
-                    return m.getId() == meeting.getId();
-                }).limit(1).collect(Collectors.toList()).get(0);
-
-                assert meetingInAdapter != null;
-
-                assert meetingInAdapter.toString().equals(meeting.toString());
-            }
-            assert getListAdapter().getCurrentList().size() == meetings.size();
+            List<Meeting> currentList = getListAdapter().getCurrentList();
+            Assert.assertTrue(currentList.containsAll(meetings) && currentList.size() == meetings.size());
         }
     }
 
@@ -79,11 +71,7 @@ public class MeetingListAdapterAssertions {
         @Override
         public void check(View view, NoMatchingViewException noViewFoundException) {
             super.check(view, noViewFoundException);
-            Meeting meetingInAdapter = getListAdapter().getCurrentList().stream().filter((m) -> {
-                return m.getId() == meeting.getId();
-            }).limit(1).collect(Collectors.toList()).get(0);
-            Log.d("debug", meetingInAdapter.toString());
-            assert meeting.toString().equals(meetingInAdapter.toString());
+            Assert.assertTrue(getListAdapter().getCurrentList().contains(meeting));
         }
     }
 }
