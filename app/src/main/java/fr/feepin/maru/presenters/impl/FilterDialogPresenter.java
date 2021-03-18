@@ -52,6 +52,18 @@ public class FilterDialogPresenter extends BasePresenter<FilterDialogMvpView> im
 
     @Override
     public void onApplyButtonClick() {
+        ArrayList<Room> selectedRooms = new ArrayList<>();
+
+        for (Map.Entry<Room, Boolean> entry : rooms.entrySet()) {
+            if (entry.getValue()) {
+                selectedRooms.add(entry.getKey());
+            }
+        }
+
+        if (selectedRooms.isEmpty() && startingTimeHours == 0 && endingTimeHours == 0){
+            getView().sendFilterData(null);
+        }
+
         long startingTimeMillis;
         long endingTimeMillis;
 
@@ -65,14 +77,6 @@ public class FilterDialogPresenter extends BasePresenter<FilterDialogMvpView> im
 
         calendar.set(Calendar.HOUR_OF_DAY, endingTimeHours);
         endingTimeMillis = calendar.getTimeInMillis();
-
-        ArrayList<Room> selectedRooms = new ArrayList<>();
-
-        for (Map.Entry<Room, Boolean> entry : rooms.entrySet()) {
-            if (entry.getValue()) {
-                selectedRooms.add(entry.getKey());
-            }
-        }
 
         MeetingListFilterData filterData = new MeetingListFilterData(selectedRooms, startingTimeMillis, endingTimeMillis);
         getView().sendFilterData(filterData);
