@@ -60,7 +60,6 @@ public class MeetingListActivityTest {
         onView(withId(R.id.fabAddMeeting)).perform(ViewActions.click());
         intended(hasComponent(AddMeetingActivity.class.getName()));
         Intents.release();
-
     }
 
     @Test
@@ -100,12 +99,12 @@ public class MeetingListActivityTest {
     @Test
     public void addingMeeting_withSuccess() {
         Meeting expectedNewMeeting = new Meeting(
-                FakeMeetingApi.getInstance().getMeetings().size()+1,
+                FakeMeetingApi.getInstance().getMeetings().size() + 1,
                 DateUtil.getDateMillisFromTime(17, 30),
                 Room.DAISY,
                 "Brainstorming",
                 Arrays.asList(FakeMeetingApiGenerator.fakeEmails[2], FakeMeetingApiGenerator.fakeEmails[7])
-                );
+        );
 
         onView(withId(R.id.fabAddMeeting)).perform(ViewActions.click());
 
@@ -132,7 +131,6 @@ public class MeetingListActivityTest {
 
         onView(withId(R.id.addMeeting)).perform(ViewActions.click());
 
-        Log.d("debug", expectedNewMeeting.toString());
         onView(withId(R.id.rvMeetings)).check(MeetingListAdapterAssertions.contains(expectedNewMeeting));
     }
 }
