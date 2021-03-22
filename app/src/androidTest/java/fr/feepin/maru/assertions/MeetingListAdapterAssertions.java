@@ -32,8 +32,9 @@ public class MeetingListAdapterAssertions {
 
         @Override
         public void check(View view, NoMatchingViewException noViewFoundException) {
+            if (noViewFoundException != null) throw noViewFoundException;
+
             RecyclerView recyclerView = (RecyclerView) view;
-            if (recyclerView == null) throw noViewFoundException;
             MeetingListAdapter listAdapter = (MeetingListAdapter) recyclerView.getAdapter();
             assert listAdapter != null;
             this.listAdapter = listAdapter;
