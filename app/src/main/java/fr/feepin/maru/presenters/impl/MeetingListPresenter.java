@@ -18,11 +18,9 @@ public class MeetingListPresenter extends BasePresenter<MeetingListMvpView> impl
 
     private MeetingListFilterData filterData;
     private ExecutorService executorService;
-    private Handler handler;
 
     public MeetingListPresenter(ExecutorService executorService, MeetingApi meetingApi) {
         super(meetingApi);
-        handler = new Handler();
         this.executorService = executorService;
     }
 
@@ -46,12 +44,7 @@ public class MeetingListPresenter extends BasePresenter<MeetingListMvpView> impl
                         filteredList.add(meeting);
                     }
                 }
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        getView().setMeetingListData(filteredList);
-                    }
-                });
+                getView().setMeetingListData(filteredList);
             });
         }
     }
