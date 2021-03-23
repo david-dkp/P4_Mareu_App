@@ -10,6 +10,7 @@ import android.view.MenuItem;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executors;
 
 import fr.feepin.maru.R;
 import fr.feepin.maru.adapters.MeetingListAdapter;
@@ -48,7 +49,7 @@ public class MeetingListActivity extends AppCompatActivity implements
         setupToolbar();
 
         //Init presenter
-        meetingListPresenter = new MeetingListPresenter(FakeMeetingApi.getInstance());
+        meetingListPresenter = new MeetingListPresenter(Executors.newSingleThreadExecutor(), FakeMeetingApi.getInstance());
     }
 
     private void setupRecyclerView() {

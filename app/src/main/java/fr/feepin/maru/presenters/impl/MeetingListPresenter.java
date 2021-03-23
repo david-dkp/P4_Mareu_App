@@ -4,6 +4,8 @@ import android.os.Handler;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+
 
 import fr.feepin.maru.data.local.MeetingApi;
 import fr.feepin.maru.models.Meeting;
@@ -15,43 +17,42 @@ import fr.feepin.maru.views.MeetingListMvpView;
 public class MeetingListPresenter extends BasePresenter<MeetingListMvpView> implements MeetingListMvpPresenter {
 
     private MeetingListFilterData filterData;
+    private ExecutorService executorService;
     private Handler handler;
 
-    public MeetingListPresenter(MeetingApi meetingApi) {
+    public MeetingListPresenter(ExecutorService executorService, MeetingApi meetingApi) {
         super(meetingApi);
         handler = new Handler();
+        this.executorService = executorService;
     }
 
     private void updateMeetingList() {
         if (filterData == null) {
             getView().setMeetingListData(getMeetingApi().getMeetings());
         } else {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    long startingTime = filterData.getStartingTimeMillis();
-                    long endingTime = filterData.getEndingTimeMillis();
-                    List<Room> selectedRooms = filterData.getSelectedRooms();
+            executorService.execute(() -> {
+                long startingTime = filterData.getStartingTimeMillis();
+                long endingTime = filterData.getEndingTimeMillis();
+                List<Room> selectedRooms = filterData.getSelectedRooms();
 
-                    List<Meeting> meetings = getMeetingApi().getMeetings();
-                    ArrayList<Meeting> filteredList = new ArrayList<>();
+                List<Meeting> meetings = getMeetingApi().getMeetings();
+                ArrayList<Meeting> filteredList = new ArrayList<>();
 
-                    for (Meeting meeting : meetings) {
-                        boolean isInRange = meeting.getStartingTime() < endingTime && meeting.getStartingTime() >= startingTime;
-                        if (selectedRooms.size() == 0 && isInRange) {
-                            filteredList.add(meeting);
-                        } else if (selectedRooms.contains(meeting.getRoom()) && isInRange) {
-                            filteredList.add(meeting);
-                        }
+                for (Meeting meeting : meetings) {
+                    boolean isInRange = meeting.getStartingTime() < endingTime && meeting.getStartingTime() >= startingTime;
+                    if (selectedRooms.size() == 0 && isInRange) {
+                        filteredList.add(meeting);
+                    } else if (selectedRooms.contains(meeting.getRoom()) && isInRange) {
+                        filteredList.add(meeting);
                     }
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            getView().setMeetingListData(filteredList);
-                        }
-                    });
                 }
-            }).start();
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        getView().setMeetingListData(filteredList);
+                    }
+                });
+            });
         }
     }
 
