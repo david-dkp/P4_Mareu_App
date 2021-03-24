@@ -1,6 +1,7 @@
 package fr.feepin.maru.activities;
 
 import android.util.Log;
+import android.view.KeyEvent;
 
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.contrib.RecyclerViewActions;
@@ -109,7 +110,7 @@ public class MeetingListActivityTest {
         onView(withId(R.id.fabAddMeeting)).perform(ViewActions.click());
 
         //Subject
-        onView(withId(R.id.editTextSubject)).perform(ViewActions.typeText("Brainstorming"));
+        onView(withId(R.id.editTextSubject)).perform(ViewActions.typeText("Brainstorming"), ViewActions.pressKey(KeyEvent.KEYCODE_ENTER));
 
         //Room
         onView(withId(R.id.spinnerRooms)).perform(ViewActions.click());
