@@ -12,6 +12,8 @@
     <string name="text_filter_room">Room</string>
     <string name="text_filter_time">Time</string>
     <string name="text_filter_by">Filter by : </string>
+    <string name="text_ok">OK</string>
+    <string name="text_cancel">Cancel</string>
 
     <!--Room names-->
     <string name="room_mario">Mario</string>
@@ -35,5 +37,6 @@
     <string name="text_add_meeting_time">Time : </string>
     <string name="title_add_meeting">Add Meeting</string>
     <string name="text_subject">Subject</string>
+    <string name="text_add_manual">Add manually</string>
 
 </resources>

@@ -40,13 +40,15 @@ public class AddMeetingPresenter extends BasePresenter<AddMeetingMvpView> implem
     @Override
     public void onParticipantClick(String email) {
         participants.remove(email);
-        addParticipants.add(email);
         updateParticipantList();
+
+        addParticipants.add(email);
         updateAddParticipantList();
     }
 
     @Override
     public void onAddParticipantClick(String email) {
+        if (email.trim().equals("")) return;
         participants.add(email);
         addParticipants.remove(email);
         getView().toggleAddParticipantView(false);

@@ -1,13 +1,17 @@
 package fr.feepin.maru.activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
@@ -27,7 +31,6 @@ import fr.feepin.maru.adapters.ParticipantListAdapter;
 import fr.feepin.maru.adapters.RoomSpinnerAdapter;
 import fr.feepin.maru.data.local.FakeMeetingApi;
 import fr.feepin.maru.databinding.ActivityAddMeetingBinding;
-import fr.feepin.maru.models.Room;
 import fr.feepin.maru.presenters.interfaces.AddMeetingMvpPresenter;
 import fr.feepin.maru.presenters.impl.AddMeetingPresenter;
 import fr.feepin.maru.utils.DateUtil;
@@ -65,7 +68,7 @@ public class AddMeetingActivity extends AppCompatActivity implements
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
 
         setupParticipantRecyclerView();
-        setupAddParticipantRecyclerView();
+        setupAddParticipantView();
         setupAddParticipantButton();
         setupRoomSpinner();
         setupSubjectField();
@@ -114,7 +117,7 @@ public class AddMeetingActivity extends AppCompatActivity implements
         binding.rvParticipants.setAdapter(participantListAdapter);
     }
 
-    private void setupAddParticipantRecyclerView() {
+    private void setupAddParticipantView() {
         addParticipantListAdapter = new AddParticipantListAdapter(this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
 
@@ -127,6 +130,10 @@ public class AddMeetingActivity extends AppCompatActivity implements
             public void onClick(View view) {
                 presenter.onScrimClick();
             }
+        });
+
+        binding.tvAddManually.setOnClickListener((v) -> {
+            showNewParticipantDialog();
         });
     }
 
@@ -180,6 +187,34 @@ public class AddMeetingActivity extends AppCompatActivity implements
         binding.timePicker.setOnTimeChangedListener((timePicker, i, i1) -> presenter.onTimeChange(DateUtil.getDateMillisFromTime(i, i1)));
     }
 
+    private void showNewParticipantDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.text_add_manual);
+
+        EditText editText = new EditText(this);
+        editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+
+        builder.setView(editText);
+
+        builder.setPositiveButton(R.string.text_ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                presenter.onAddParticipantClick(editText.getText().toString());
+                toggleAddParticipantView(false);
+                dialogInterface.dismiss();
+            }
+        });
+
+        builder.setNegativeButton(R.string.text_cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+
+        builder.show();
+    }
+
     @Override
     public void onAddParticipantClick(String email) {
         presenter.onAddParticipantClick(email);
@@ -207,16 +242,16 @@ public class AddMeetingActivity extends AppCompatActivity implements
 
         if (open) {
             containerTransform.setStartView(binding.ivAddParticipant);
-            containerTransform.setEndView(binding.rvAddParticipant);
-            containerTransform.addTarget(binding.rvAddParticipant);
+            containerTransform.setEndView(binding.clAddParticipantView);
+            containerTransform.addTarget(binding.clAddParticipantView);
             containerTransform.setScrimColor(Color.TRANSPARENT);
 
             TransitionManager.beginDelayedTransition(binding.getRoot(), containerTransform);
             binding.scrim.setVisibility(View.VISIBLE);
             binding.ivAddParticipant.setVisibility(View.INVISIBLE);
-            binding.rvAddParticipant.setVisibility(View.VISIBLE);
+            binding.clAddParticipantView.setVisibility(View.VISIBLE);
         } else {
-            containerTransform.setStartView(binding.rvAddParticipant);
+            containerTransform.setStartView(binding.clAddParticipantView);
             containerTransform.setEndView(binding.ivAddParticipant);
             containerTransform.addTarget(binding.ivAddParticipant);
             containerTransform.setScrimColor(Color.TRANSPARENT);
@@ -224,7 +259,7 @@ public class AddMeetingActivity extends AppCompatActivity implements
             TransitionManager.beginDelayedTransition(binding.getRoot(), containerTransform);
             binding.scrim.setVisibility(View.INVISIBLE);
             binding.ivAddParticipant.setVisibility(View.VISIBLE);
-            binding.rvAddParticipant.setVisibility(View.INVISIBLE);
+            binding.clAddParticipantView.setVisibility(View.INVISIBLE);
         }
     }
 
